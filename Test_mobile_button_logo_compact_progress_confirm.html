@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Kunden Upload-Portal</title>
+<style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2a2a2a;
+            font-size: 1.8em;
+            text-align: center;
+        }
+        .logo {
+            display: block;
+            margin: 0 auto 20px auto;
+            max-width: 180px;
+            height: auto;
+        }
+        .upload-section {
+            margin-top: 30px;
+        }
+        .upload-link, .form-button {
+            display: inline-block;
+            padding: 10px 16px;
+            background-color: #0078d4;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 0.95em;
+            margin-bottom: 10px;
+        }
+        .upload-link:hover, .form-button:hover {
+            background-color: #005a9e;
+        }
+        .footer {
+            margin-top: 40px;
+            font-size: 0.9em;
+            color: #555;
+            text-align: center;
+        }
+        form {
+            margin-top: 15px;
+        }
+        input[type="file"] {
+            margin-bottom: 10px;
+            width: 100%;
+        }
+        input[type="submit"] {
+            background-color: #0078d4;
+            color: white;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+        input[type="submit"]:hover {
+            background-color: #005a9e;
+        }
+        @media screen and (max-width: 600px) {
+            .container {
+                margin: 10px;
+                padding: 15px;
+            }
+            h1 {
+                font-size: 1.4em;
+            }
+            .upload-link, .form-button, input[type="submit"] {
+                padding: 8px 12px;
+                font-size: 0.85em;
+            }
+        }
+    
+        #uploadStatus {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: green;
+        }
+        #progressBar {
+            width: 100%;
+            background-color: #f3f3f3;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-top: 10px;
+            height: 20px;
+        }
+        #progressBarFill {
+            height: 100%;
+            width: 0%;
+            background-color: #0078d4;
+            text-align: center;
+            color: white;
+            line-height: 20px;
+        }
+</style>
+<script>
+function checkFormSubmission() {
+    const confirmation = document.getElementById("form-confirmation");
+    confirmation.style.display = "block";
+}
+
+// Simulate form submission detection after returning from Microsoft Forms
+window.addEventListener("focus", function() {
+    // Simulate that user has submitted the form after returning to the page
+    checkFormSubmission();
+});
+</script></head>
+<body>
+<div class="container">
+<img alt="Firmenlogo" class="logo" src="https://bollconsulting.sharepoint.com/sites/Kundenportal/Shared%20Documents/18f2ec36d0.png"/>
+<h1>Kunden Upload-Portal</h1>
+<p>Bitte füllen Sie das Formular aus und laden Sie Ihre Datei über den untenstehenden Link oder direkt über den Dialog hoch.</p>
+<a class="form-button" href="https://forms.office.com/Pages/ResponsePage.aspx?id=N9KLhoOw3Ee58QTs8wutu7Jf8zlRwUxEh6FdTUvtNfFUNkY4V0FPTDM0SDBHTExPUlcxMzYwUFE4VC4u" target="_blank">Formular öffnen</a>
+<div class="upload-section">
+<h2>Datei hochladen</h2>
+<p>Klicken Sie auf den folgenden Link, um Ihre Datei hochzuladen (kein Login erforderlich):</p>
+<a class="upload-link" href="https://bollconsulting.sharepoint.com/:u:/s/Kundenportal/EZzYiPxCbk9DjIHbg0ERlQsBeT7j3_FlexzsXYQbnvx-sA?e=LBYf42" target="_blank">Datei hochladen</a>
+<p>Oder wählen Sie eine Datei direkt aus:</p>
+<form action="#" enctype="multipart/form-data" method="post" onsubmit="simulateUpload(event)">
+<label for="fileUpload">Datei auswählen:</label><br/>
+<input id="fileUpload" name="fileUpload" type="file"/><br/>
+<input type="submit" value="Datei senden"/>
+</form>
+<div id="progressBar"><div id="progressBarFill">0%</div></div>
+<div id="uploadStatus"></div>
+</div>
+<div class="footer">
+<p>Ihre Daten werden gemäß DSGVO vertraulich behandelt. Bei Fragen wenden Sie sich bitte an <a href="mailto:support@bollconsulting.de">support@bollconsulting.de</a>.</p>
+</div>
+<div id="form-confirmation" style="display:none; margin-top:20px; font-weight:bold; color:green;">✅ Formular erfolgreich versendet.</div></div>
+<script>
+function simulateUpload(event) {
+    event.preventDefault();
+    var progressBarFill = document.getElementById("progressBarFill");
+    var uploadStatus = document.getElementById("uploadStatus");
+    progressBarFill.style.width = "0%";
+    uploadStatus.innerText = "";
+    let progress = 0;
+    let interval = setInterval(function() {
+        if (progress >= 100) {
+            clearInterval(interval);
+            uploadStatus.innerText = "✅ Datei erfolgreich hochgeladen.";
+        } else {
+            progress += 10;
+            progressBarFill.style.width = progress + "%";
+            progressBarFill.innerText = progress + "%";
+        }
+    }, 200);
+}
+</script></body>
+</html>
